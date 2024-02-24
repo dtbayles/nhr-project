@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Key-Value</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #container {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .pane {
+            border: 1px solid #aaa;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            width: 40%;
+            height: 300px;
+            overflow-y: auto;
+        }
+        #inputPane textarea, #outputPane p {
+            width: 100%;
+            height: 90%;
+            border: none;
+            background-color: transparent;
+            resize: none;
+        }
+        button {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="inputPane" class="pane">
+        <textarea id="jsonInput" placeholder='{"key": "value"}'></textarea>
+    </div>
+    <button onclick="reverseData()">Reverse</button>
+    <div id="outputPane" class="pane">
+        <p id="reversedData"></p>
+    </div>
+</div>
+
+<script>
+  function reverseData() {
+    const jsonInput = document.getElementById('jsonInput').value;
+    try {
+      const dataToSend = JSON.parse(jsonInput);
+      fetch('/reverse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('reversedData').innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => console.error('Error:', error));
+    } catch (e) {
+      alert('Invalid JSON input');
+      console.error('Parsing error:', e);
+    }
+  }
+</script>
+</body>
+</html>

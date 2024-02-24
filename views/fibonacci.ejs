@@ -1,0 +1,36 @@
+<!-- views/fibonacci.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fibonacci Sequence</title>
+  <style>
+    .fibonacci-container {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .fibonacci-number {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+<div class="fibonacci-container">
+  <form action="/fibonacci" method="POST">
+    <input type="number" name="count" min="1" max="100" placeholder="Enter a number (1-100)" required>
+    <button type="submit">Generate</button>
+  </form>
+
+  <% if (sequence) { %>
+    <% sequence.forEach(function(number) { %>
+      <span class="fibonacci-number"><%= number %></span>
+    <% }); %>
+  <% } %>
+</div>
+</body>
+</html>

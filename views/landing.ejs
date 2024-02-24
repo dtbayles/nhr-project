@@ -1,0 +1,69 @@
+<!-- views/landing.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card, .dropdown-form {
+            margin: 10px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .card:hover {
+            background-color: #e0e0e0;
+        }
+        .form-card {
+            cursor: default;
+        }
+        .form-card:hover {
+            background-color: #f0f0f0;
+        }
+        .form-card button:hover {
+            cursor: pointer;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome to Drew Bayles' Node+Express Demo</h1>
+
+<div class="card">
+    <a href="/fibonacci">Fibonacci Generator</a>
+</div>
+
+<div class="card form-card">
+    <form action="/forecast" method="get">
+        <label for="state">Select a state:</label>
+        <select name="state" id="state">
+            <% for(const [code, {lat, lon}] of Object.entries(stateCoordinates)) { %>
+                <option value="<%= code %>"><%= code %></option>
+            <% } %>
+        </select>
+        <button type="submit">Get Forecast</button>
+    </form>
+</div>
+
+
+<div class="card">
+    <a href="/reverse">Reverse Objects</a>
+</div>
+
+</body>
+</html>
